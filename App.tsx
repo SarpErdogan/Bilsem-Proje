@@ -3,6 +3,8 @@ import { View, Text, Button } from 'react-native';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { store, RootState, AppDispatch } from './src/store';
 import { reset, connected } from './src/store/counterSlice';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
+
 const MainPageButtons = () => 
 {
   const count = useSelector((state: RootState) => state.counter.value);
@@ -15,6 +17,21 @@ const MainPageButtons = () =>
       onPress = {()=>{dispatch(reset())}}></Button>
     );
   }
+  const ConnectionFunction = async () => 
+  {
+    const devices:any = await (RNBluetoothClassic as any).list();
+
+    const hc05:any = devices.find((device:any) => device.name === 'HC-05');
+
+    if (hc05) {
+      const connected:any = await hc05.connect();
+      if (connected) {
+        await hc05.write('Hello HC-05');
+        const data = await hc05.read();
+      }
+    }
+  }
+
   const StartButton = ():any => 
   {
     return (
