@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { reset, connected } from './src/store/counterSlice';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
 const MainPageButtons = (props: any): any => {
@@ -27,21 +26,27 @@ const MainPageButtons = (props: any): any => {
 
 const connectionFunction = async () => {
   try {
-    const devices: any = await (RNBluetoothClassic as any).list();
-    const hc05: any = devices.find((device: any) => device.name === "HC-05");
+    const devices = await RNBluetoothClassic.getBondedDevices();
+    const hc05 = devices.find((d: any) => d.name === "HC-05");
 
-    if (hc05) {
-      const connected: any = await hc05.connect();
-      if (connected) {
-        await hc05.write("Hello HC-05");
-        const data = await hc05.read();
-        console.log("HC-05 den veri:", data);
-      }
-    } else {
-      console.log("HC-05 bulunamadı.");
+    if (!hc05) {
+      Alert.alert("Cihaz Bulunamadı", "HC-05 cihazını açınız ve eşleştirin.");
+      return null;
     }
+
+    const connected = await (RNBluetoothClassic as any).connect(hc05.address);
+    if (connected) {
+      Alert.alert("Bağlandı", "HC-05’e bağlandı!");
+      return connected;
+    } else {
+      Alert.alert("Bağlantı Başarısız", "HC-05’e bağlanılamadı.");
+      return null;
+    }
+
   } catch (err) {
-    console.error("Bluetooth bağlantı hatası:", err);
+    console.error("Bluetooth Hatası:", err);
+    Alert.alert("Hata", "Bluetooth bağlantısı sırasında hata oluştu.");
+    return null;
   }
 };
 
