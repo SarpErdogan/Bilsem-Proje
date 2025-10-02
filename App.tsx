@@ -1,21 +1,49 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { reset, connected } from './src/store/counterSlice';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
-const MainPageButtons = (props:any):any => 
-{
-  return(
+const MainPageButtons = (props: any): any => {
+  const handlePress = async () => {
+    switch (props.name) {
+      case "Cihaza Bağlan":
+        await connectionFunction();
+        break;
+
+      default:
+        console.log("Tanımsız buton:", props.name);
+        break;
+    }
+  };
+
+  return (
     <View style={styles.container}>
-      <TouchableOpacity 
-        style={styles.button} 
-        onPress={() => Alert.alert(String(props.name) + "a basıldı!")}
-      >
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
         <Text style={styles.text}>{props.name}</Text>
       </TouchableOpacity>
     </View>
   );
+};
 
-}
+const connectionFunction = async () => {
+  try {
+    const devices: any = await (RNBluetoothClassic as any).list();
+    const hc05: any = devices.find((device: any) => device.name === "HC-05");
 
+    if (hc05) {
+      const connected: any = await hc05.connect();
+      if (connected) {
+        await hc05.write("Hello HC-05");
+        const data = await hc05.read();
+        console.log("HC-05 den veri:", data);
+      }
+    } else {
+      console.log("HC-05 bulunamadı.");
+    }
+  } catch (err) {
+    console.error("Bluetooth bağlantı hatası:", err);
+  }
+};
 
 export default function App():any {
   return (
@@ -34,8 +62,8 @@ export default function App():any {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",       // yatayda ortala
-    paddingTop: 150,            // ekranın üstünden 150px boşluk
+    alignItems: "center",       
+    paddingTop: 30,       
     backgroundColor: "#f5f5f5",
   },
   button: {
@@ -47,7 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 4,          // butonlar arası boşluk
+    marginVertical: 4,    
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
