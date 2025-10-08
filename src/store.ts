@@ -1,11 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './store/counterSlice';
+// src/store.ts
+import { create } from "zustand";
 
-export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
-});
+interface InputState {
+  inputValue: string;
+  setInputValue: (value: string) => void;
+  clear: () => void;
+}
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const useInputStore = create<InputState>((set) => ({
+  inputValue: "",
+  setInputValue: (value) => set({ inputValue: value }),
+  clear: () => set({ inputValue: "" }),
+}));
