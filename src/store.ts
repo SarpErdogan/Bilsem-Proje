@@ -7,8 +7,18 @@ interface InputState {
   clear: () => void;
 }
 
+interface TextState {
+  text: string;
+  setText: (value: string) => void;
+}
+
 export const useInputStore = create<InputState>((set) => ({
   inputValue: "",
   setInputValue: (value) => set({ inputValue: value }),
   clear: () => set({ inputValue: "" }),
+}));
+
+export const useTextStore = create<TextState>((set) => ({
+  text: "",
+  setText: (value) => set({text: value}),
 }));

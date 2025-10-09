@@ -1,6 +1,6 @@
 // src/api.ts
 import  db  from "./firebase";
-import { ref, get, child, set, onValue, off } from "firebase/database";
+import { ref, get, child, set, onValue, off, push  } from "firebase/database";
 import { ParentNode } from "./types";
 import { QueryClient } from "@tanstack/react-query";
 
@@ -15,6 +15,11 @@ export async function fetchParent(): Promise<ParentNode> {
   }
   return {};
 }
+
+export const addItem = async (text: string) => {
+  const parentRef = ref(db, "parent/items");
+  await push(parentRef, { value: text });
+};
 
 /**
  * Overwrite: parent/value alanını set eder.

@@ -2,11 +2,11 @@
 import React, { useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchParent, overwriteParentValue, subscribeParentRealtime } from "./api";
+import { fetchParent, overwriteParentValue, subscribeParentRealtime, addItem } from "./api";
 import { ParentNode } from "./types";
-import { useInputStore } from "./store";
+import { useInputStore, useTextStore } from "./store";
 
-export default function ParentEditor() {
+export function Temporary() {
   const queryClient = useQueryClient();
 
   // React Query: parent verisini çek (initial fetch)
@@ -81,19 +81,109 @@ export default function ParentEditor() {
       <View style={styles.buttons}>
         <Button
           title="Üzerine Yaz (Save)"
-          onPress={() => {
-            if (!inputValue || inputValue.trim() === "") {
-              Alert.alert("Uyarı", "Boş değer gönderilemez.");
-              return;
-            }
-            mutation.mutate(inputValue);
-          }}
-          disabled={mutation.isLoading}
+          onPress={addParentItem}
+          disabled={mutation.isPending}
         />
       </View>
     </View>
   );
 }
+
+
+export default function ParentEditor() {
+  const queryClient = useQueryClient();
+  const text = useTextStore((s) => s.text);
+  const setText = useTextStore((s) => s.setText);
+
+  const mutation = useMutation({
+    mutationFn: addItem, // api.ts içindeki addItem fonksiyonunu kullanıyoruz
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["parent"] }); // listeyi yenile
+      Alert.alert("Başarılı", "Yeni veri eklendi!");
+      setText(""); // input'u temizle
+    },
+    onError: (err: any) => {
+      Alert.alert("Hata", err?.message ?? "Bilinmeyen hata");
+    },
+  });
+
+  const handleAdd = () => {
+    if (!text.trim()) {
+      Alert.alert("Uyarı", "Lütfen bir değer gir.");
+      return;
+    }
+    mutation.mutate(text);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Yeni veri ekle:</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Yeni değer gir..."
+        value={text}
+        onChangeText={setText}
+      />
+
+      <Button
+        title={mutation.isPending ? "Ekleniyor..." : "Ekle"}
+        onPress={handleAdd}
+        disabled={mutation.isPending}
+      />
+    </View>
+  );
+}
+
+const stiller = StyleSheet.create({
+  container: { padding: 16 },
+  header: { fontSize: 18, fontWeight: "bold", marginBottom: 8 },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    borderRadius: 6,
+    marginBottom: 12,
+  },
+});
+
+
+export const addParentItem = () => {
+  const text = useTextStore((s) => s.text);
+  const setText = useTextStore((s) => s.setText);
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: addItem,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["parentData"] }); // Listeyi yenile
+      setText("");
+    },
+  });
+
+  return (
+    <View style={{ padding: 20 }}>
+      <Text>Yeni veri ekle:</Text>
+      <TextInput
+        value={text}
+        onChangeText={setText}
+        placeholder="Yeni değer gir"
+        style={{
+          borderWidth: 1,
+          borderColor: "#aaa",
+          borderRadius: 6,
+          padding: 8,
+          marginVertical: 10,
+        }}
+      />
+      <Button
+        title={mutation.isPending ? "Ekleniyor..." : "Ekle"}
+        onPress={() => mutation.mutate(text)}
+        disabled={!text || mutation.isPending}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: { padding: 16 },
