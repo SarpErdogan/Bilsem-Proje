@@ -89,7 +89,6 @@ export function Temporary() {
   );
 }
 
-
 export default function ParentEditor() {
   const queryClient = useQueryClient();
   const text = useTextStore((s) => s.text);
@@ -146,7 +145,6 @@ const stiller = StyleSheet.create({
     marginBottom: 12,
   },
 });
-
 
 export const addParentItem = () => {
   const text = useTextStore((s) => s.text);
