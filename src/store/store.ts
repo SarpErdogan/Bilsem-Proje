@@ -12,10 +12,16 @@ interface TextState {
   setText: (value: string) => void;
 }
 
-interface VisibilityState {
-  isVisible:boolean;
-  setIsVisible: () => void;
-}
+type ScreenState = {
+  currentScreen: 'home' | 'bluetooth' | 'records';
+  setScreen: (screen: 'home' | 'bluetooth' | 'records') => void;
+};
+
+export const useScreenStore = create<ScreenState>((set:any) => ({
+  currentScreen: 'home',
+  setScreen: (screen:any) => set({ currentScreen: screen }),
+}));
+
 export const useInputStore = create<InputState>((set) => 
 ({
   inputValue: "",
@@ -23,14 +29,3 @@ export const useInputStore = create<InputState>((set) =>
   clear: () => set({ inputValue: "" }),
 }));
 
-export const useTextStore = create<TextState>((set) => 
-({
-  text: "",
-  setText: (value) => set({text: value}),
-}));
-
-export const useVisibilityStore = create <VisibilityState>((set) => 
-({
-  isVisible: false,
-  setIsVisible: () => set((s) => ({isVisible: !s.isVisible}))
-}));

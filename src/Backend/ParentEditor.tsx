@@ -4,7 +4,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchParent, overwriteParentValue, subscribeParentRealtime, addItem } from "./api";
 import { ParentNode } from "./types";
-import { useInputStore, useTextStore } from "./store";
+import { useInputStore, useTextStore } from "../store/store";
 
 export default function ParentEditor() {
   const queryClient = useQueryClient();
@@ -50,18 +50,6 @@ export default function ParentEditor() {
     </View>
   );
 }
-
-const stiller = StyleSheet.create({
-  container: { padding: 16 },
-  header: { fontSize: 18, fontWeight: "bold", marginBottom: 8 },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    borderRadius: 6,
-    marginBottom: 12,
-  },
-});
 
 
 const styles = StyleSheet.create({
