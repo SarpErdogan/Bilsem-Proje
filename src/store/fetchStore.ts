@@ -1,7 +1,6 @@
 import { create } from 'zustand';
-import { fetchRecords } from '../backend/fetchRecords';
+import { fetchRecords } from '../backend/fetch/fetchRecords';
 
-// Store için State tanımlama
 interface DataState {
   records: any[];
   loading: boolean;
@@ -12,7 +11,6 @@ interface DataState {
   fetchData: () => void;
 }
 
-// Zustand store kullanarak veriyi yönetiyoruz
 const useDataStore = create<DataState>((set:any) => ({
   records: [],
   loading: false,

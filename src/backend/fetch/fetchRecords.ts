@@ -1,4 +1,3 @@
-// src/services/fetchRecords.ts
 import { PermissionsAndroid } from 'react-native';
 
 // Veri çekme fonksiyonu

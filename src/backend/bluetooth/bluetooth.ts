@@ -1,5 +1,3 @@
-// src/bluetooth/bluetooth.ts
-
 import { PermissionsAndroid, Platform } from 'react-native';
 import RNBluetoothClassic, {
   BluetoothDevice,

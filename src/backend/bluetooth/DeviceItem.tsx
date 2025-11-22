@@ -1,5 +1,3 @@
-// src/components/DeviceItem.tsx
-
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { BluetoothDevice } from 'react-native-bluetooth-classic';

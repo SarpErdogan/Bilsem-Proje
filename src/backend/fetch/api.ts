@@ -1,4 +1,3 @@
-// src/api.ts
 import  db  from "./firebase";
 import { ref, get, child, set, onValue, off, push  } from "firebase/database";
 import { ParentNode } from "./types";
