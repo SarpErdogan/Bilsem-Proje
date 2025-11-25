@@ -6,15 +6,11 @@ import {
   getPairedDevices,
   connectToDevice,
 } from '../backend/bluetooth/bluetooth';
-import { NavigationProp } from '@react-navigation/native';
 import { BluetoothDevice } from 'react-native-bluetooth-classic';
 import { useScreenStore } from '../store/store';
 
-interface Props {
-  navigation: NavigationProp<any>;
-}
 
-const Bluetooth = ({ navigation }:any) => {
+const Bluetooth = () => {
   const { currentScreen, setScreen } = useScreenStore();
   const [devices, setDevices] = useState<BluetoothDevice[]>([]);
 
@@ -29,9 +25,9 @@ const Bluetooth = ({ navigation }:any) => {
 
   const handleSelect = async (device: BluetoothDevice) => {
     const connected = await connectToDevice(device);
-    navigation.navigate('Chat', { device: connected });
+    setScreen("home");
   };
-
+ 
   return (
     <View style={{ padding: 20 }}>
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>
