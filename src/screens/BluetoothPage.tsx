@@ -29,8 +29,8 @@ const Bluetooth = () => {
   };
  
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>
+    <View style = {{flex:1,justifyContent:"top"}}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10, padding:20 }}>
         Eşleştirilmiş Cihazlar
       </Text>
 
@@ -41,32 +41,35 @@ const Bluetooth = () => {
           <DeviceItem device={item} onPress={handleSelect} />
         )}
       />
+      <View>
       <TouchableOpacity style={styles.homeButton} onPress ={()=> {setScreen("home")}}>
         <Text style={styles.homeButtonText}>◀</Text>
       </TouchableOpacity>
     </View>
+    </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
-    homeButton: {
-        position: 'absolute',
-        bottom: 20,
-        left: 20,
-        backgroundColor: '#222',
-        paddingHorizontal: 20,
-        paddingVertical: 12,
-        borderRadius: 12,
-        elevation: 6, 
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.25,
-        shadowRadius: 5,
+  homeButton: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    backgroundColor: '#222',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 12,
+    elevation: 6, 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 5,
     },
-    homeButtonText: {
-        color: '#fff',
-        fontSize: 20,
-        fontWeight: '600',
+  homeButtonText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: '600',
   },
 });
 
