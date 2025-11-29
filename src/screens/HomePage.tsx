@@ -5,20 +5,21 @@ import { useScreenStore } from '../store/store';
 const HomePage = () => {
     const { currentScreen, setScreen } = useScreenStore();
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => setScreen('bluetooth')} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+        <View style={{ flex: 1,flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <Text ></Text>
+            <TouchableOpacity onPress={() => setScreen('bluetooth')} style={styles.button}>
                 <Text>CİHAZA BAĞLAN</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => {}} style={styles.button}>
                 <Text>CİHAZI BAŞLAT</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => {}} style={styles.button}>
                 <Text>CİHAZI DURDUR</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => {}} style={styles.button}>
                 <Text>FOTOĞRAF ÇEK</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setScreen('records')} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => setScreen('records')} style={styles.button}>
                 <Text>KAYITLARI İNCELE</Text>
             </TouchableOpacity>
         </View>
@@ -26,25 +27,17 @@ const HomePage = () => {
 }
 
 const styles = StyleSheet.create({
-    homeButton: {
-        position: 'absolute',
-        bottom: 20,
-        left: 20,
-        backgroundColor: '#222',
-        paddingHorizontal: 20,
-        paddingVertical: 12,
-        borderRadius: 12,
-        elevation: 6, 
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.25,
-        shadowRadius: 5,
+    button: {
+        flex : 1,
+        width: '90%',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 10,
+        backgroundColor: 'lightblue',
     },
-    homeButtonText: {
-        color: '#fff',
-        fontSize: 20,
-        fontWeight: '600',
-  },
 });
 
 export default HomePage;

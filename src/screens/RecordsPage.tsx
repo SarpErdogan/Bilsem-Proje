@@ -6,6 +6,7 @@ const RecordsPage = () => {
     const { currentScreen, setScreen } = useScreenStore();
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{ fontSize: 24, fontWeight: '700', marginTop: 20 }}>Kayıtlar</Text>
             <TouchableOpacity style={styles.recordTO} onPress ={()=> {}}>
                 <Text style={styles.recordText}>17.05-18.02         28.11.2025</Text>
             </TouchableOpacity>  
@@ -33,11 +34,14 @@ const RecordsPage = () => {
 
 const styles = StyleSheet.create({
     recordTO: {
-        flex: 1,                  
+        flex: 1,   
+        width: '90%',           
+        paddingTop: 20,               
+        paddingBottom: 20,               
         marginHorizontal: 12,       
-        marginVertical: 6,         
+        marginVertical: 10,         
         borderRadius: 10,
-        backgroundColor: '#007AFF', 
+        backgroundColor: 'lightblue', 
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: '#000',
@@ -47,7 +51,7 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     recordText: {
-        color: '#fff',
+        color: '#000000ff',
         fontSize: 18,
         fontWeight: '600',
     },

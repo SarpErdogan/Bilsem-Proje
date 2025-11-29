@@ -29,7 +29,7 @@ const Bluetooth = () => {
   };
  
   return (
-    <View style = {{flex:1,justifyContent:"top"}}>
+    <View style = {{flex:1, padding:20}}>
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10, padding:20 }}>
         Eşleştirilmiş Cihazlar
       </Text>
