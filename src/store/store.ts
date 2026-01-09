@@ -12,8 +12,8 @@ interface TextState {
 }
 
 type ScreenState = {
-  currentScreen: 'home' | 'bluetooth' | 'records';
-  setScreen: (screen: 'home' | 'bluetooth' | 'records') => void;
+  currentScreen: 'home' | 'records';
+  setScreen: (screen: 'home' | 'records') => void;
 };
 
 export const useScreenStore = create<ScreenState>((set:any) => ({

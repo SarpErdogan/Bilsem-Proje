@@ -20,6 +20,8 @@
     "react-native-ble-manager": "^12.2.0",
     "react-native-ble-plx": "^3.5.0",
     "react-native-bluetooth-classic": "^1.73.0-rc.14",
+    "react-native-bluetooth-hc05": "^0.2.0",
+    "react-native-bluetooth-serial": "^1.0.0-rc1",
     "react-native-bluetooth-serial-next": "^1.2.3",
     "react-redux": "^9.2.0",
     "redux": "^5.0.1",

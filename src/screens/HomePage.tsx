@@ -1,22 +1,24 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useScreenStore } from '../store/store';
+import { connect, sendText } from '../backend/bluetooth/bluetooth';
 
 const HomePage = () => {
     const { currentScreen, setScreen } = useScreenStore();
+
     return (
         <View style={{ flex: 1,flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <Text ></Text>
-            <TouchableOpacity onPress={() => setScreen('bluetooth')} style={styles.button}>
+            <TouchableOpacity onPress={() => connect()} style={styles.button}>
                 <Text>CİHAZA BAĞLAN</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={styles.button}>
+            <TouchableOpacity onPress={() => sendText('basla')} style={styles.button}>
                 <Text>CİHAZI BAŞLAT</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={styles.button}>
+            <TouchableOpacity onPress={() => sendText('dur')} style={styles.button}>
                 <Text>CİHAZI DURDUR</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={styles.button}>
+            <TouchableOpacity onPress={() => sendText('foto')} style={styles.button}>
                 <Text>FOTOĞRAF ÇEK</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setScreen('records')} style={styles.button}>
