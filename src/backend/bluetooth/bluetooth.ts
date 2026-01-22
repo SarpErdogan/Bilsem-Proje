@@ -26,6 +26,11 @@ const requestBluetoothPermissions = async () => {
   return granted === PermissionsAndroid.RESULTS.GRANTED;
 };
 
+const delay = (ms: number) =>
+  new Promise<void>(resolve => setTimeout(resolve, ms));
+
+
+
 const connect = async () => {
   try {
     const hasPermission = await requestBluetoothPermissions();
@@ -49,9 +54,9 @@ const connect = async () => {
     const payload =
       `SET_TIME:${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ` +
       `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-
+    await delay(5000);
     await sendText(payload + '\n');
-    
+
     Alert.alert('Bağlandı', 'Raspberry Pi ile bağlantı kuruldu');
   } catch (e) {
     Alert.alert('Bağlantı hatası', String(e));
