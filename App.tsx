@@ -1,21 +1,23 @@
-// src/App.tsx
-import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ParentEditor from "./src/ParentEditor";
+import React from 'react';
+import { View } from 'react-native';
 
-const queryClient = new QueryClient();
+import { useScreenStore } from './src/store/store';
+import HomeScreen from './src/screens/HomePage';
+import Bluetooth from './src/screens/BluetoothPage';
+import RecordsPage from './src/screens/RecordsPage';
 
 export default function App() {
+  const { currentScreen, setScreen } = useScreenStore();
+
+  const screens = {
+    home: <HomeScreen />,
+    bluetooth: <Bluetooth />,
+    records: <RecordsPage />,
+  };
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaView style={styles.flex}>
-        <ParentEditor />
-      </SafeAreaView>
-    </QueryClientProvider>
+      <View style={{ flex: 1 }}>
+        {screens[currentScreen]}
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  flex: { flex: 1, backgroundColor: "#fff" },
-});
