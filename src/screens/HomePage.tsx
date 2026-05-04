@@ -6,7 +6,7 @@ const HomePage = () => {
     const { currentScreen, setScreen } = useScreenStore();
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => setScreen('bluetooth')} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => connect()} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
                 <Text>CİHAZA BAĞLAN</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {}} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>

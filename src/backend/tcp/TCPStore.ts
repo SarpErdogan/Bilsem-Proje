@@ -16,7 +16,7 @@ type ScreenState = {
   setScreen: (screen: 'home' | 'records') => void;
 };
 
-export const useScreenStore = create<ScreenState>((set:any) => ({
+export const useCStore = create<ScreenState>((set:any) => ({
   currentScreen: 'home',
   setScreen: (screen:any) => set({ currentScreen: screen }),
 }));
