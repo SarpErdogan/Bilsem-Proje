@@ -33,11 +33,12 @@ const RecordsPage = () => {
 
 const styles = StyleSheet.create({
     recordTO: {
-        flex: 1,                  
+        flex: 0,  
+        height: 60,                
         marginHorizontal: 12,       
         marginVertical: 6,         
         borderRadius: 10,
-        backgroundColor: '#007AFF', 
+        backgroundColor: '#0066ff', 
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: '#000',

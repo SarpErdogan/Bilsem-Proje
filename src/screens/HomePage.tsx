@@ -1,24 +1,25 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useScreenStore } from '../store/store';
+import { connectTCPServer, sendTCP } from '../backend/tcp/TCPConnect';
 
 const HomePage = () => {
     const { currentScreen, setScreen } = useScreenStore();
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => connect()} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => connectTCPServer()} style={{ margin: 10, backgroundColor: '#0066ff', padding: 20, borderRadius: 10 }}>
                 <Text>CİHAZA BAĞLAN</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => {sendTCP("basla")}} style={{ margin: 10, backgroundColor: '#0066ff', padding: 20, borderRadius: 10 }}>
                 <Text>CİHAZI BAŞLAT</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => {sendTCP("dur")}} style={{ margin: 10, backgroundColor: '#0066ff', padding: 20, borderRadius: 10 }}>
                 <Text>CİHAZI DURDUR</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => {sendTCP("foto")}} style={{ margin: 10, backgroundColor: '#0066ff', padding: 20, borderRadius: 10 }}>
                 <Text>FOTOĞRAF ÇEK</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setScreen('records')} style={{ padding: 20, backgroundColor: 'lightblue', borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => setScreen('records')} style={{ margin: 10, backgroundColor: '#0066ff', padding: 20, borderRadius: 10 }}>
                 <Text>KAYITLARI İNCELE</Text>
             </TouchableOpacity>
         </View>
